@@ -4,6 +4,11 @@ using Utils;
 
 namespace Movement
 {
+    /// <summary>
+    /// Base EntityMovement script does not move on its own
+    /// Attach a script that implements <see cref="IMovementProvider"/> on the same game object
+    /// This script will take input from the movement provider and move
+    /// </summary>
     [RequireComponent(typeof(IMovementProvider), typeof(Rigidbody))]
     public class EntityMovement : MonoBehaviour
     {
