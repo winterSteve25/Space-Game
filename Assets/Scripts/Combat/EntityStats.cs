@@ -8,20 +8,20 @@ namespace Combat
     /// </summary>
     public class EntityStats : MonoBehaviour
     {
-        [SerializeField] private int health;
-        public int Health => health;
+        [SerializeField] private float health;
+        public float Health => health;
         
-        [SerializeField] private int defence;
-        public int Defence => defence;
+        [SerializeField] private float defence;
+        public float Defence => defence; // will mitigate all damage when reaching 2000
 
-        private const float DmgReductionPerDef = 0.05f;
+        private const float DmgReductionPerDef = 0.0005f; // 0.05%
         
-        public void Hurt(int amount)
+        public void Hurt(float amount)
         {
-            health -= Mathf.RoundToInt(amount * (1 - defence * DmgReductionPerDef));
+            health -= amount * Mathf.Max(0, 1 - defence * DmgReductionPerDef);
         }
 
-        public void Heal(int amount)
+        public void Heal(float amount)
         {
             health += amount;
         }

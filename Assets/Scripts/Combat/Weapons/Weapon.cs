@@ -4,10 +4,7 @@ namespace Combat.Weapons
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField] private int damage;
-        public int Damage => damage;
-
-        [SerializeField] private float fireRate;
-        public float FireRate => fireRate;
+        [SerializeField] private WeaponStats weaponStats;
+        public WeaponStats WeaponStats => weaponStats;
     }
 }
