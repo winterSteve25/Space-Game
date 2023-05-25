@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Utils;
@@ -12,21 +13,19 @@ namespace Movement
     [RequireComponent(typeof(IMovementProvider), typeof(Rigidbody))]
     public class EntityMovement : MonoBehaviour
     {
+        private const float SpeedMultiplierConstant = 10f;
+        
         private IMovementProvider _movementProvider;
         private Rigidbody _rigidbody;
         private Transform _transform;
+        private float _speedMultiplier;
         
         private bool _grounded;
-        private Collider[] _grounds;
-
         private bool _canJump;
         
-        [BoxGroup("Ground Checking")]
         [BoxGroup("Ground Checking"), SerializeField] private float groundDrag = 5;
         [BoxGroup("Ground Checking"), SerializeField] private LayerMask groundLayer;
-        [BoxGroup("Ground Checking"), SerializeField, Required] private Transform groundChecker;
         
-        [BoxGroup("Camera")]
         [BoxGroup("Camera"), SerializeField] private Optional<Camera> cam;
         [BoxGroup("Camera"), SerializeField, Required, ShowIf("@cam.Exists()")] private Transform camPosition;
         
@@ -35,7 +34,7 @@ namespace Movement
             _movementProvider = GetComponent<IMovementProvider>();
             _rigidbody = GetComponent<Rigidbody>();
             _transform = transform;
-            _grounds = new Collider[1];
+            _speedMultiplier = SpeedMultiplierConstant;
             _canJump = true;
         }
 
@@ -76,8 +75,7 @@ namespace Movement
         {
             if (_movementProvider.Direction == Vector3.zero) return;
             var airSpeedMultiplier = _grounded ? 1 : _movementProvider.AirSpeedMultiplier;
-            _rigidbody.AddForce(_movementProvider.Direction * (_movementProvider.Speed * 10f * airSpeedMultiplier),
-                ForceMode.Force);
+            _rigidbody.AddForce(_movementProvider.Direction * (_movementProvider.Speed * _speedMultiplier * airSpeedMultiplier), ForceMode.Force);
         }
 
         private void UpdateCamera()
@@ -100,19 +98,15 @@ namespace Movement
             // limit the character velocity
             var velocity = _rigidbody.velocity;
             var flatVelocity = new Vector3(velocity.x, 0, velocity.z);
-            if (flatVelocity.magnitude > _movementProvider.Speed)
-            {
-                var limited = flatVelocity.normalized * _movementProvider.Speed;
-                _rigidbody.velocity = new Vector3(limited.x, _rigidbody.velocity.y, limited.z);
-            }
+            if (!(flatVelocity.magnitude > _movementProvider.Speed)) return;
+            var limited = flatVelocity.normalized * _movementProvider.Speed;
+            _rigidbody.velocity = new Vector3(limited.x, _rigidbody.velocity.y, limited.z);
         }
 
         private void GroundCheck()
         {
+            _grounded = Physics.Raycast(_transform.position, Vector3.down, 1.1f, groundLayer.value);
             // if grounded apply drag so we dont slide
-            Physics.OverlapSphereNonAlloc(groundChecker.position, 0.15f, _grounds, groundLayer.value);
-            _grounded = _grounds[0] is not null;
-            _grounds[0] = null;
             _rigidbody.drag = _grounded ? groundDrag : 0;
         }
     }
