@@ -424,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3541923615789341058}
-  - component: {fileID: 3541923615789341057}
+  - component: {fileID: 6211467549998420860}
   m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
@@ -449,7 +449,7 @@ Transform:
   m_Father: {fileID: 3541923616164559989}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3541923615789341057
+--- !u!114 &6211467549998420860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,12 +458,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 3541923615789341059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b7bbf906f724698969c0b304ad18cb5, type: 3}
+  m_Script: {fileID: 11500000, guid: e8851bd0789a450487c3bbc4d43d9fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStats:
-    damage: 0
-    fireRate: 0
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  stats:
+    exists: 1
+    value:
+      stats:
+      - type: 1
+        value: 0.25
+  ammoCount: 200
 --- !u!1 &3541923616164559992
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257aad5363bf4d77a58e5e00bf5a84cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 3541923615789341057}
+  weapon: {fileID: 6211467549998420860}
   playerCam: {fileID: 3541923616164559989}
 --- !u!1 &3541923616647444905
 GameObject:

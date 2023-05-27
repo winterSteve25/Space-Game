@@ -6,7 +6,7 @@ namespace Combat
     /// Component that holds stats for an entity
     /// Also contains methods to interact with the stats
     /// </summary>
-    public class EntityStats : MonoBehaviour
+    public class EntityStats : MonoBehaviour, IDamageable
     {
         [SerializeField] private float health;
         public float Health => health;
@@ -16,7 +16,7 @@ namespace Combat
 
         private const float DmgReductionPerDef = 0.0005f; // 0.05%
         
-        public void Hurt(float amount)
+        public void Damage(float amount)
         {
             health -= amount * Mathf.Max(0, 1 - defence * DmgReductionPerDef);
         }

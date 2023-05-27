@@ -7,7 +7,7 @@ namespace Utils
     [Serializable]
     public struct Optional<T>
     {
-        [SerializeField, HorizontalGroup("Main", Width = 20), HideLabel]
+        [SerializeField, HorizontalGroup("Main", Width = 20, PaddingLeft = 5, PaddingRight = -5), HideLabel]
         private bool exists;
         
         [SerializeField, HorizontalGroup("Main"), LabelWidth(40), EnableIf("@exists")] 
@@ -53,6 +53,16 @@ namespace Utils
         /// </summary>
         /// <returns></returns>
         public bool Exists() => exists;
+
+        /// <summary>
+        /// If the value exists returns the value it holds, if not it returns the given else value
+        /// </summary>
+        /// <param name="elseValue">Return value if this optional is empty</param>
+        /// <returns></returns>
+        public T OrElse(T elseValue)
+        {
+            return exists ? value : elseValue;
+        }
         
         /// <summary>
         /// Creates an empty optional
