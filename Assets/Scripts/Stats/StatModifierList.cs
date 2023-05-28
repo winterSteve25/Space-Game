@@ -55,5 +55,5 @@ namespace Stats
             this.Property.Children[0].Draw(label);
         }
     }
-}
 #endif
+}

@@ -13,19 +13,20 @@ namespace Combat.Weapons
     /// </summary>
     public abstract class Weapon : MonoBehaviour
     {
-        [SerializeField, HideLabel, BoxGroup("Stats")] 
-        private Optional<StatList<WeaponStat>> stats;
+        // this is mostly for debugging, gonna be creating these
+        [SerializeField, HideLabel, BoxGroup("Stats")] private Optional<StatList<WeaponStat>> stats;
         [SerializeField] protected List<WeaponPart> parts;
 
+        // weapon name maybe we can procedurally generate this later
         [SerializeField] protected string weaponName;
         public string WeaponName => weaponName;
-
-        public event Action<string> TotalAmmoCountChanged; 
-        public event Action<string> LoadedAmmoCountChanged; 
 
         protected StatList<WeaponStat> Stats;
         private float _timeSinceLastAttack;
         private Optional<UniTask> _attackSequence;
+        
+        public event Action<string> TotalAmmoCountChanged; 
+        public event Action<string> LoadedAmmoCountChanged; 
 
         protected virtual void Start()
         {

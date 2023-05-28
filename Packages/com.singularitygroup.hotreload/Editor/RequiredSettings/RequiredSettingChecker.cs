@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using SingularityGroup.HotReload.Editor.Cli;
 using UnityEditor;
-using UnityEngine;
 #if UNITY_2019_4_OR_NEWER
-using Unity.CodeEditor;
 #endif
 
 namespace SingularityGroup.HotReload.Editor {

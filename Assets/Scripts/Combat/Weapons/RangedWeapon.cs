@@ -17,6 +17,7 @@ namespace Combat.Weapons
             base.Start();
             _magazineSize = Mathf.RoundToInt(Stats[WeaponStat.MagazineSize].OrElse(30));
             _damage = Stats[WeaponStat.Damage].OrElse(0);
+            // from seconds to milliseconds
             _reloadSpeed = Mathf.RoundToInt(Stats[WeaponStat.ReloadSpeed].OrElse(0) * 1000);
             OnTotalAmmoCountChanged(totalAmmoCount.ToString());
             OnLoadedAmmoCountChanged(loadedAmmoCount.ToString());

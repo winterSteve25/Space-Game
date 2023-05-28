@@ -2,10 +2,7 @@ using System;
 using System.IO;
 using SingularityGroup.HotReload.DTO;
 using UnityEditor;
-using UnityEngine;
 #if UNITY_2019_4_OR_NEWER
-using System.Reflection;
-using Unity.CodeEditor;
 #endif
 
 namespace SingularityGroup.HotReload.Editor {

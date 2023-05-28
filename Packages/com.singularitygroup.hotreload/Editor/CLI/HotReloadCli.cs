@@ -1,11 +1,8 @@
-using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using SingularityGroup.HotReload.Newtonsoft.Json;
 using UnityEditor;
-using Debug = UnityEngine.Debug;
 
 namespace SingularityGroup.HotReload.Editor.Cli {
     [InitializeOnLoad]

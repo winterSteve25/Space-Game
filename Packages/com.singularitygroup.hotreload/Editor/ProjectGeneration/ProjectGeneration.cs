@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,9 +14,7 @@ using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEditor.PackageManager;
 using UnityEditorInternal;
-using UnityEngine;
 using Assembly = UnityEditor.Compilation.Assembly;
-using Debug = UnityEngine.Debug;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace SingularityGroup.HotReload.Editor.ProjectGeneration {

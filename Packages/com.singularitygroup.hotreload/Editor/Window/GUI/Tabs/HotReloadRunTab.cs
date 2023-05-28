@@ -9,7 +9,6 @@ using UnityEditor;
 using UnityEngine;
 using Task = System.Threading.Tasks.Task;
 #if UNITY_2019_4_OR_NEWER
-using Unity.CodeEditor;
 #endif
 
 namespace SingularityGroup.HotReload.Editor {

@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
 using UnityEngine;
 using EditorGUI = UnityEditor.EditorGUI;
-using SessionPrefs = SingularityGroup.HotReload.Editor.HotReloadPrefs.SessionPrefs;
 
 namespace SingularityGroup.HotReload.Editor {
     internal class HotReloadSettingsTab : HotReloadTabBase {
