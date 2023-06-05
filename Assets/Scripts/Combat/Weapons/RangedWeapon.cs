@@ -29,37 +29,46 @@ namespace Combat.Weapons
             {
                 // no loaded ammo and have no ammo to reload
                 if (totalAmmoCount <= 0) return;
-
-                // if we have less than the amount needed to fill a magazine
-                if (totalAmmoCount - _magazineSize < 0)
-                {
-                    loadedAmmoCount = totalAmmoCount;
-                    totalAmmoCount = 0;
-                }
-                else
-                {
-                    loadedAmmoCount = _magazineSize;
-                    totalAmmoCount -= _magazineSize;
-                }
-
-                await UniTask.Delay(_reloadSpeed);
-                OnTotalAmmoCountChanged(totalAmmoCount.ToString());
-                OnLoadedAmmoCountChanged(loadedAmmoCount.ToString());
-                return;
+                await Reload();
             }
 
             loadedAmmoCount--;
             OnLoadedAmmoCountChanged(loadedAmmoCount.ToString());
-
+            
             if (!Physics.Raycast(origin, direction, out var hitInfo, Mathf.Infinity)) return;
             if (hitInfo.collider.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.Damage(_damage);
             }
+            
+            
+            if (loadedAmmoCount <= 0)
+            {
+                await Reload();
+            }
         }
 
         public override void Aim()
         {
+        }
+
+        private async UniTask Reload()
+        {
+            // if we have less than the amount needed to fill a magazine
+            if (totalAmmoCount - _magazineSize < 0)
+            {
+                loadedAmmoCount = totalAmmoCount;
+                totalAmmoCount = 0;
+            }
+            else
+            {
+                loadedAmmoCount = _magazineSize;
+                totalAmmoCount -= _magazineSize;
+            }
+
+            await UniTask.Delay(_reloadSpeed);
+            OnTotalAmmoCountChanged(totalAmmoCount.ToString());
+            OnLoadedAmmoCountChanged(loadedAmmoCount.ToString());
         }
     }
 }
